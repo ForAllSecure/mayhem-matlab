@@ -22,6 +22,4 @@ RUN apt-get update
 
 COPY --from=compile /${PROJECT_NAME}/mayhemit_ert_shrlib_rtw/mayhemit /mayhemit
 
-COPY --from=compile /${PROJECT_NAME}/testsuite /testsuite
-
 WORKDIR /
