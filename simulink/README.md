@@ -2,12 +2,12 @@
 
 This document explains how to use MATLAB to convert a mayhemit.slx Simulink model to C code, compile it, and perform fuzzing tests using Mayhem for Code.
 
+![Simulink Model](assets/simulink-model.png)  
+
 There are three parts of the simulink model:  
 * An S function to receive input from Mayhem  
 * A transfer function block representing the model under test  
 * An output file block to store results from the model  
-
-![Simulink Model](assets/simulink-model.png)
 
 ## Prerequisites
 
