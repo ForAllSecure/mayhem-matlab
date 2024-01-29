@@ -2,7 +2,7 @@
 
 
 # Set the path to your MATLAB installation
-MATLAB_PATH="/home/ubuntu/matlab/bin"
+MATLAB_PATH="/usr/local/MATLAB/R2023b/bin"
 
 # Convert matlab code to c code
 # Note: matlab must part of the path

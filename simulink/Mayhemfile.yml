@@ -10,4 +10,4 @@ tasks:
   - name: behavior_testing
   - name: coverage_analysis
 cmds:
-  - cmd: /mayhemit @@
+  - cmd: /mayhemit

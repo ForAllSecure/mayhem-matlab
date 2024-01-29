@@ -5,15 +5,20 @@
 # Convert simulink to c code
 
 # Set the path to your MATLAB installation
-MATLAB_PATH="/home/ubuntu/matlab/bin"
+MATLAB_PATH="/usr/local/MATLAB/R2023b/bin"
 
 # Set the name of your Simulink model (without the .slx extension)
 MODEL_NAME="mayhemit"
+
+# Run MATLAB in command-line mode to build S function
+"$MATLAB_PATH/matlab" -nodisplay -nosplash -nodesktop -r "mex stdin_sfunction.c; exit"
+
 
 # Run MATLAB in command-line mode and execute the code generation commands
 "$MATLAB_PATH/matlab" -nodisplay -nosplash -nodesktop -r " \
     try, \
         open_system('$MODEL_NAME'), \
+	set_param('$MODEL_NAME', 'GenCodeOnly', 'on'), \
         set_param('$MODEL_NAME', 'RTWVerbose', 'off'), \
         set_param('$MODEL_NAME', 'SolverType', 'Fixed-step'), \
         set_param('$MODEL_NAME', 'FixedStep', 'auto'), \
@@ -39,6 +44,11 @@ curl --no-progress-meter -Lo ~/bin/mayhem-${ARCH} ${MAYHEM_URL}/cli/Linux/mayhem
 MAYHEM_PROMPT=1 mayhem-${ARCH} login --url ${MAYHEM_URL} --token ${MAYHEM_TOKEN}
 
 # Compile the code
+cd mayhemit_grt_rtw
+make -f mayhemit.mk
+cd ..
+
+# Build Dockerfile
 REGISTRY=$(mayhem-${ARCH} docker-registry)
 IMAGE="${REGISTRY}/${NAME}:${VERSION_UUID}"
 docker build --platform=linux/amd64 -f Dockerfile -t ${IMAGE} .
