@@ -1,8 +1,17 @@
+/**
+ * This file is known as a test harness. 
+ * It acts as an injection point so Mayhem can send 
+ * inputs to the compiled simulink model.
+ * Input is received over stdin and converted to doubles.
+ * This input is then passed into the simulink model.
+ */
+
 #define S_FUNCTION_NAME stdin_sfunction
 #define S_FUNCTION_LEVEL 2
 
 #include "simstruc.h"
 #include <stdio.h>
+
 
 // Initialization function, called at the start of the simulation.
 static void mdlInitializeSizes(SimStruct *S)
